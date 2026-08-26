@@ -1,13 +1,7 @@
-//
-//  ContentView.swift
-//  aula_lists
-//
-//  Created by Turma01-2 on 25/08/26.
-//
-
 import SwiftUI
 
-struct Midia{
+struct Midia {
+    
     var idMidia: Int
     var nomeMidia: String
     var fotoMidia: String
@@ -17,7 +11,9 @@ struct Midia{
 }
 
 struct ContentView: View {
+    
     var conteudos: [Midia] = [
+        
         Midia(
             idMidia: 1,
             nomeMidia: "O Senhor dos Anéis: A Sociedade do Anel",
@@ -199,55 +195,218 @@ struct ContentView: View {
         )
     ]
     
-var body: some View{
-    NavigationStack {
-            List(conteudos.filter {$0.categoriaMidia == "Filme"}, id: \.idMidia) { conteudo in
+    var body: some View {
+        
+        NavigationStack {
+            
+            ScrollView {
                 
-                NavigationLink {
-                    VStack(spacing: 20) {
-                        
-                        Image(conteudo.fotoMidia)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 250, height: 300)
-                        
-                        Text(conteudo.nomeMidia)
-                            .font(.title)
-                            .bold()
-                        
-                        Text("Categoria: \(conteudo.categoriaMidia)")
-                        
-                        Text("Gênero: \(conteudo.generoMidia)")
-                        
-                        Text("País: \(conteudo.paisMidia)")
-                    }
-                    .padding()
+                VStack(alignment: .leading, spacing: 20) {
                     
-                } label: {
+                    // =========================
+                    // FILMES
+                    // =========================
                     
-                    HStack {
-                        Image(conteudo.fotoMidia)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 70, height: 90)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                    Text("FILMES")
+                        .font(.title2)
+                        .bold()
+                        .padding(.horizontal)
+                    
+                    LazyVStack(spacing: 8) {
                         
-                        VStack(alignment: .leading) {
-                            Text(conteudo.nomeMidia)
-                                .font(.headline)
+                        ForEach(
+                            conteudos.filter {
+                                $0.categoriaMidia == "Filme"
+                            },
+                            id: \.idMidia
+                        ) { conteudo in
                             
-                            Text(conteudo.categoriaMidia)
-                                .foregroundStyle(.secondary)
+                            NavigationLink {
+                                
+                                VStack(spacing: 20) {
+                                    
+                                    Image(conteudo.fotoMidia)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(
+                                            width: 250,
+                                            height: 300
+                                        )
+                                    
+                                    Text(conteudo.nomeMidia)
+                                        .font(.title)
+                                        .bold()
+                                    
+                                    Text(
+                                        "Categoria: \(conteudo.categoriaMidia)"
+                                    )
+                                    
+                                    Text(
+                                        "Gênero: \(conteudo.generoMidia)"
+                                    )
+                                    
+                                    Text(
+                                        "País: \(conteudo.paisMidia)"
+                                    )
+                                }
+                                .padding()
+                                
+                            } label: {
+                                
+                                HStack {
+                                    
+                                    // Imagem
+                                    Image(conteudo.fotoMidia)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(
+                                            width: 55,
+                                            height: 55
+                                        )
+                                        .clipShape(
+                                            RoundedRectangle(
+                                                cornerRadius: 5
+                                            )
+                                        )
+                                    
+                                    // Nome e informações
+                                    VStack(
+                                        alignment: .leading,
+                                        spacing: 3
+                                    ) {
+                                        
+                                        Text(conteudo.nomeMidia)
+                                            .font(.headline)
+                                            .foregroundStyle(.primary)
+                                        
+                                        Text(conteudo.paisMidia)
+                                            .font(.caption)
+                                            .foregroundStyle(.secondary)
+                                    }
+                                    
+                                    Spacer()
+                                }
+                                .padding(8)
+                                .background(
+                                    RoundedRectangle(
+                                        cornerRadius: 8
+                                    )
+                                    .fill(.background)
+                                    .shadow(
+                                        radius: 4
+                                    )
+                                )
+                                .padding(.horizontal)
+                            }
                         }
+                    }
                     
+                    
+                    // =========================
+                    // SÉRIES
+                    // =========================
+                    
+                    Text("SÉRIES")
+                        .font(.title2)
+                        .bold()
+                        .padding(.horizontal)
+                        .padding(.top, 10)
+                    
+                    LazyVStack(spacing: 8) {
+                        
+                        ForEach(
+                            conteudos.filter {
+                                $0.categoriaMidia == "Série"
+                            },
+                            id: \.idMidia
+                        ) { conteudo in
+                            
+                            NavigationLink {
+                                
+                                VStack(spacing: 20) {
+                                    
+                                    Image(conteudo.fotoMidia)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(
+                                            width: 250,
+                                            height: 300
+                                        )
+                                    
+                                    Text(conteudo.nomeMidia)
+                                        .font(.title)
+                                        .bold()
+                                    
+                                    Text(
+                                        "Categoria: \(conteudo.categoriaMidia)"
+                                    )
+                                    
+                                    Text(
+                                        "Gênero: \(conteudo.generoMidia)"
+                                    )
+                                    
+                                    Text(
+                                        "País: \(conteudo.paisMidia)"
+                                    )
+                                }
+                                .padding()
+                                
+                            } label: {
+                                
+                                HStack {
+                                    
+                                    // Imagem
+                                    Image(conteudo.fotoMidia)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(
+                                            width: 55,
+                                            height: 55
+                                        )
+                                        .clipShape(
+                                            RoundedRectangle(
+                                                cornerRadius: 5
+                                            )
+                                        )
+                                    
+                                    // Nome e informações
+                                    VStack(
+                                        alignment: .leading,
+                                        spacing: 3
+                                    ) {
+                                        
+                                        Text(conteudo.nomeMidia)
+                                            .font(.headline)
+                                            .foregroundStyle(.primary)
+                                        
+                                        Text(conteudo.paisMidia)
+                                            .font(.caption)
+                                            .foregroundStyle(.secondary)
+                                    }
+                                    
+                                    Spacer()
+                                }
+                                .padding(8)
+                                .background(
+                                    RoundedRectangle(
+                                        cornerRadius: 8
+                                    )
+                                    .fill(.background)
+                                    .shadow(
+                                        radius: 4
+                                    )
+                                )
+                                .padding(.horizontal)
+                            }
+                        }
                     }
                 }
+                .padding(.vertical)
             }
-            .navigationTitle("Filmes")
+            .navigationTitle("Catálogo")
         }
     }
 }
-
 
 #Preview {
     ContentView()
