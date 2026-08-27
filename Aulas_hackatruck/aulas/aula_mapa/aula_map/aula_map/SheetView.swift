@@ -20,6 +20,7 @@ struct SheetView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 300, height: 500)
+                            .border(Color.brown, width: 5)
                     } else if phase.error != nil {
                         // Erro ao carregar
                         Image(systemName: "photo.badge.exclamationmark")
